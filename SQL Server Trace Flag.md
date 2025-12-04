@@ -1,5 +1,5 @@
 # Microsoft SQL Server Trace Flags
-Detailed list of all discovered (documented and undocumented) Microsoft SQL Server trace flags (**620** trace flags).
+Detailed list of all discovered (documented and undocumented) Microsoft SQL Server trace flags (**622** trace flags).
 
 ⚠ **REMEMBER: Be extremely careful with trace flags, test in your development environment first.
 And consult professionals first if you are the slightest uncertain about the effects of your changes.**
@@ -45,7 +45,7 @@ Source links:
 **Great thanks to:**
 - Aaron Morelli ([b](https://sqlcrossjoin.wordpress.com) | [@sqlcrossjoin](https://twitter.com/sqlcrossjoin))
 - Steinar Andersen ([b](http://www.sqlservice.se/) | [@SQLSteinar](https://twitter.com/SQLSteinar))
-- Brent Ozar ([b](https://www.brentozar.com/) | [@BrentO](https://twitter.com/BrentO))
+- Brent Ozar ([b](https://www.brentozar.com/))
 - Yusuf Anis
 - Lars Utterström
 - Martin Höglund
@@ -82,6 +82,9 @@ Source links:
 - Aaron Bertrand ([b](https://sqlperformance.com/author/abertrand) | [t](https://twitter.com/AaronBertrand))
 - Wilfred van Dijk
 - Tracy Boggiano ([b](http://databasesuperhero.com) | [t](https://twitter.com/TracyBoggiano))
+- Danilo Zocco (https://github.com/CrazySwimmer)
+- Michael Abair (https://github.com/abair34)
+- Mikulas Mraz (https://github.com/Prohiller)
 
 
 <a id="what-are-microsoft-sql-server-trace-flags"></a>
@@ -233,11 +236,11 @@ If you know behavior some of them please open an issue or contact me (taranov.pr
  - [Trace Flag 3427](#3427) (for SQL Server 2016)
  - [Trace Flag 3449](#3449) (for versions SQL Server 2012 SP3 CU3 or later or SQL Server 2014 SP1 CU7 or later)
  - [Trace Flag 6534](#6534) (for versions SQL Server 2012, 2014, 2016) (if use [spatial data types](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server))
- - [Trace Flag 7412](#7412) (for versions >= SQL Server 2016)
+ - [Trace Flag 7412](#7412) (for versions >= SQL Server 2016 and < SQL Server 2019)
  - [Trace Flag 7745](#7745) (for versions >= SQL Server 2016 and Query Store enabled)
  - [Trace Flag 7752](#7752) (for versions >= SQL Server 2016 and < 2019 and Query Store enabled)
  - [Trace Flag 7806](#7806) (for SQL Server Express Edition)
- - [Trace Flag 8099](#8099) (for versions >= 2019 CU2)
+ - [Trace Flag 8099](#8099) (for versions 2019 CU2 and 2019 CU3 only)
 
 **Trace Flag 272** prevents identity gap after restarting SQL Server 2012 instance, critical for columns with identity and `tinyint` and `smallint` data types.
 (Demo for repeating this issue [here](https://github.com/ktaranov/sqlserver-kit/Errors/Identity_gap_sql_server_2012.sql))
@@ -284,12 +287,12 @@ Use this trace flag if SQL Server is experiencing high number of [QDS_LOADDB](ht
 
 **Trace Flag: 7806** enables a dedicated administrator connection ([DAC]) on SQL Server Express.
 
-**Trace Flag: 8099** enables a spinlock contention fix for high-end systems running SQL Server 2019 (15.x) serving many concurrent users.
+**Trace Flag: 8099** enables a spinlock contention fix for high-end systems running SQL Server 2019 (15.x) serving many concurrent users.  Starting with SQL 2019 CU 4 this fix is enabled by default.
 
 
 <a id="trace-flags-list"></a>
 ## Trace Flags List
-Summary: **620 trace flags**
+Summary: **622 trace flags**
 
 
 <a id="-1"></a>
@@ -2818,9 +2821,9 @@ Link: https://support.microsoft.com/kb/3003760
 <a id="3895"></a>
 #### Trace Flag: 3895
 **Undocumented trace flag**<br />
-Function: In SQL Server 2019, when you enable the [Memory-Optimized TempDB Metadata](https://docs.microsoft.com/en-us/sql/relational-databases/databases/tempdb-database) feature, this trace flag is automatically enabled after the next restart.
-When you disable that feature, the trace flag is automatically removed after the next restart.
-Also if you add race flag 3895 to startup parameters after restarting SQL Server option `IsTempdbMetadataMemoryOptimized` will be enabled.<br />
+Function: In SQL Server 2019, when you enable the [Memory-Optimized TempDB Metadata](https://docs.microsoft.com/en-us/sql/relational-databases/databases/tempdb-database) feature, this trace flag is automatically enabled as a global session flag after the next restart.
+When you disable that feature, the trace flag is automatically removed as a global session flag after the next restart.
+Also, if you add trace flag 3895 to startup parameters after restarting SQL Server option `IsTempdbMetadataMemoryOptimized` will be enabled. NOTE: It is NOT recommended to add trace flag 3895 as a startup trace flag to enable TempDB Memory-Optimized Metadata. Although this technically enables the option, you will no longer be able to disable it using sp_configure or ALTER SERVER CONFIGURATION. The only way you'll be able to disable this feature is to manually remove this trace flag from startup parameters in the SQL Server Configuration Manager startup properties<br />
 Link: https://github.com/ktaranov/sqlserver-kit/blob/master/Scripts/Trace_Flag/Trace_Flag_3895.sql<br />
 Scope: global only
 
@@ -3340,6 +3343,21 @@ Function: SQL 9 – After 4610 & 4618 you can still customize the quota for Toke
 Link: https://support.microsoft.com/kb/959823
 
 
+<a id="4631"></a>
+#### Trace Flag: 4631
+Function: Disables SHA2_256/AES256 for hashing passwords that generate encryption keys. Starting in SQL Server 2017 (14.x), SHA2 is used instead of SHA1. This means extra steps might be necessary to have your SQL Server 2017 (14.x) installation decrypt items that were encrypted by SQL Server 2016 (13.x)<br />
+Link: [Encryption Changes in SQL Server 2017 CU2](https://learn.microsoft.com/en-us/sql/relational-databases/security/encryption/create-identical-symmetric-keys-on-two-servers?view=sql-server-ver17#encryption-changes-in-sql-server-2017-cu2)<br />
+Link: [KB 4053407: SQL Server 2017 cannot decrypt data encrypted by earlier versions of SQL Server using the same symmetric key](https://support.microsoft.com/kb/4053407)<br />
+Scope: global only
+
+
+<a id="4675"></a>
+#### Trace Flag: 4675
+Function: Enable checks on create credential for managed identity on a SQL Server on Azure VM if Microsoft Entra authentication is enabled. Enables diagnostics for the CREATE CREDENTAIL WITH IDENTITY = 'Managed Identity' statement. The trace flag provides information about the primary managed identity and its setting for SQL Server on Azure VM.<br />
+Link: [DBCC TRACEON Trace Flags](https://learn.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql?view=sql-server-ver17)<br />
+Scope: global or session
+
+
 <a id="5004"></a>
 #### Trace Flag: 5004
 Function: Pauses TDE encryption scan and causes encryption scan worker to exit without doing any work.
@@ -3465,6 +3483,38 @@ Scope: global only<br />
 SQL Server Version: >= 2019 CU1, >= 2017 CU18, >= 2016 SP1 CU10
 
 
+<a id="6773"></a>
+#### Trace Flag: 6773
+Function: Enables a fix to address an out of memory issue that occurs when bulk copying XML data where the sum of all XML attributes are > 2MB.  This flag can help in circumstances where a client is running bulk copy of XML data and it receives sql error 6303 "XML parsing: Document parsing required too much memory".<br />
+Link: https://support.microsoft.com/en-us/topic/kb4019125-fix-system-center-configuration-manager-replication-process-by-using-bcp-apis-fails-when-there-is-a-large-value-in-an-xml-column-53a969d5-801c-63ab-a557-bc89fe264394<br />
+SQL Server Version: >= 2016 CU7, >= 2014 SP2 CU6, >= 2014 SP1 CU13, >= 2012 SP3 CU9
+
+
+<a id="6950"></a>
+#### Trace Flag: 6950
+**Undocumented trace flag**<br />
+Function: Disable SQL Server 2022's TempDB contention improvements around GAM/SGAM access.<br />
+Link: [Github disable gamsgam]<br />
+Scope: global only<br />
+SQL Server Version: >= 2022
+
+ 
+<a id="6962"></a>
+#### Trace Flag: 6962
+**Undocumented trace flag**<br />
+Function: Disable SQL Server 2022's TempDB contention improvements around GAM/SGAM access.<br />
+Link: [Github disable gamsgam]<br />
+Scope: global only<br />
+SQL Server Version: >= 2022
+
+ 
+<a id="6981"></a>
+#### Trace Flag: 6981
+Function: Handle large objects (LOBs) when rebuilding the index that has an assertion issue (Location: blobbase.cpp:345; Expression: IS_ON (BLB_TI_END, m_status)). After turning on this trace flag and rebuilding the affected index, the assertion dump shouldn't be generated again. Added in SQL Server 2019 CU29.<br />
+Link: [SQL Server 2019 CU29 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2019/cumulativeupdate29#3370476)<br />
+SQL Server Version: >= 2019 CU29
+
+
 <a id="7103"></a>
 #### Trace Flag: 7103
 **Undocumented trace flag**<br />
@@ -3556,7 +3606,8 @@ Scope: global or session or query
 Function: Enables the lightweight query execution statistics profiling infrastructure.
 unless your server is already CPU bound, like you’re running all the time with 95% CPU, unless you are at that point, turn on this trace flag at any server you have.
 This would be my advice here because this enables that lightweight profiling infrastructure there and then you’ll see in a few minutes what it unleashes here.
-So one thing that happens when I enable the lightweight profiling is that the sys.dm_exec_query_profiles DMV, which is something that actually populates the live query stats ability or feature of SSMS, now also is also populated with this lightweight profiling, which means that for all essence, we are now able to run a live query stats on all fashions at any given point in time, and this is extremely useful for let’s say a production DBA that someone calls and says, “Hey, you have a problem. To tap into running system and look at what it’s doing.”<br />
+So one thing that happens when I enable the lightweight profiling is that the sys.dm_exec_query_profiles DMV, which is something that actually populates the live query stats ability or feature of SSMS, now also is also populated with this lightweight profiling, which means that for all essence, we are now able to run a live query stats on all fashions at any given point in time, and this is extremely useful for let’s say a production DBA that someone calls and says, “Hey, you have a problem. To tap into running system and look at what it’s doing.”
+**Applies to: SQL Server 2016 (13.x) Service Pack 1 and later versions. Starting with SQL Server 2019 (15.x), this trace flag has no effect because lightweight profiling is enabled by default.**<br />
 Link: [Docs Trace Flags]<br />
 Link: https://support.microsoft.com/kb/3170113<br />
 Link: https://www.brentozar.com/archive/2017/10/get-live-query-plans-sp_blitzwho/<br />
@@ -3646,6 +3697,12 @@ Link: None
 #### Trace Flag: 7614
 Function: SQL 9 - Full-text index population for the indexed view is very slow<br />
 Link: None
+
+
+<a id="7617"></a>
+#### Trace Flag: 7617
+Function: Skip dropping full-text index fragments marked as deletion during a database recovery process. Added in SQL Server 2019 CU29.<br />
+Link: [SQL Server 2019 CU29 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2019/cumulativeupdate29#3540450)
 
 
 <a id="7646"></a>
@@ -3970,10 +4027,10 @@ Link: https://blogs.msdn.microsoft.com/sqlreleaseservices/sql-server-2012-servic
 Link: [Hidden Performance & Manageability Improvements in SQL Server 2012 / 2014]<br />
 Link: [KB2964518]<br />
 Scope: global only
-
-
-<a id="8099"></a>
-#### Trace Flag: 8099
+ 
+ 
+ <a id="8101"></a>
+#### Trace Flag: 8101
 Function: Enables a spinlock contention fix for high-end systems running SQL Server 2019 (15.x) serving many concurrent users.<br />
 Note: This trace flag applies to SQL Server 2019 (15.x) CU2 and higher builds.<br />
 Link: https://support.microsoft.com/kb/4538688<br />
@@ -4043,6 +4100,12 @@ Link: https://support.microsoft.com/kb/959008
 #### Trace Flag: 8501
 Function: Writes detailed information about Ms-DTC context & state changes to the log<br />
 Link: None
+
+
+<a id="8531"></a>
+#### Trace Flag: 8531
+Function: Fixes a contention issue with high KTM_RECOVERY_MANAGER wait times that you might encounter when running XA distributed transactions. Note: You need to turn on trace flag 8531 as a startup trace flag.<br />
+Link: [SQL Server 2019 CU29 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2019/cumulativeupdate29#3417392)
 
 
 <a id="8599"></a>
@@ -4766,6 +4829,15 @@ Link: http://www.queryprocessor.com/sudf-ce/
 Function: Adds an explicit sort before creation of an index spool. Almost doesn’t change the total estimated cost. Might be identical plans with just more detail shown at that step.<br />
 Link: [New Undocumented Trace Flags]<br />
 Scope: ?
+
+
+<a id="9265"></a>
+#### Trace Flag: 9265
+**Undocumented trace flag**<br />
+Function: MS engineering team has decided to generate a DUMP from SQL 2019+ every time a “PLAN cannot be generated”. Once a Dump freezes connections during the generation, the cluster will probably lost the connectivity to the cluster and the AG can be down/failover if it has automatic failover configured. The mitigation for this issue (avoid DUMP generation) is to enable TF Trace Flag 9265 on Startup.
+Once TF 9265 is enabled, SQL Server stops generating DUMP on the “PLAN cannot be generated” error but only writes a message to ERRORLOG file (Internal Query Processor Error: The query processor could not produce a query plan. For more information, contact Customer Support Services).
+<br />
+Link: None
 
 
 <a id="9268"></a>
@@ -5498,6 +5570,14 @@ Scope: global or session<br />
 SQL Server Version: >= 2019 CU9, >= 2017 CU21
 
 
+<a id="12310"></a>
+#### Trace Flag: 12310
+Function: Availability groups are designed with flow control gates on the primary replica to avoid excessive resource consumption, such as network and memory resources, on all availability replicas. SQL Server 2022 (16.x) increases the limits to the number of messages that each gate allows. By using trace flag 12310, the increased limit is also available to the following versions of SQL Server: SQL Server 2019 (15.x) CU9, SQL Server 2017 (14.x) CU18, SQL Server 2016 (13.x) SP1 CU16.<br />
+Link: https://learn.microsoft.com/en-us/sql/database-engine/availability-groups/windows/monitor-performance-for-always-on-availability-groups?tabs=new-limits#flow-control-gates<br />
+Scope: global<br />
+SQL Server Version: >= 2019 CU9, >= 2017 CU18, >= 2016 SP1 CU16
+
+
 <a id="12311"></a>
 #### Trace Flag: 12311
 Function: After TF [12306](#12306) is enabled, you can further enable 12311 trace flag that represent maximum group commit times of **1ms**. This TF is additive whith [12312](#12312), [12314](#12314), and [12318](#12318). The maximum group commit time setting is capped at 10ms. However, these should not be repeated. For example, do not specify the same TF more than one time.<br />
@@ -5546,6 +5626,51 @@ Scope: global or session<br />
 SQL Server Version: >= 2019 CU9, >= 2017 CU21
 
 
+### Trace Flag: 12502
+Function: Disables external authorization policies for on-premises SQL Server instances.
+Use this flag when you see increased PREEMPTIVE_OS_QUERYREGISTRY waits to occur. Due to a bug a SQL Server might lookup Windows Registry values even for a simple queries which do not work with operating system at all.
+Link: [Docs Trace Flags](https://docs.microsoft.com/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql)
+Link: [SQL Server 2022 CU5 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate5#2351584)
+Scope: global<br />
+SQL Server Version: >= 2022 CU5
+
+
+Note: In my case vast majority of queries executed against SQL Server started looking up non-existing registry value at:
+`HKLM\Software\Microsoft\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQLServer\PurviewConfig`
+so this buggy behavior might be triggered only after other software gets integrated with SQL Server 2022.
+
+
+<a id="12606"></a>
+#### Trace Flag: 12606
+Function: Enables Query Store for secondary replicas.<br />
+Link: https://learn.microsoft.com/en-us/sql/relational-databases/performance/query-store-for-secondary-replicas?view=sql-server-ver16<br />
+Scope: global<br />
+SQL Server Version: >= 2022
+
+
+<a id="12618"></a>
+#### Trace Flag: 12618
+Function: Introduces a new plan regression detection model for Automatic Plan Correction that includes multiple consecutive checks.<br />
+Link: [SQL Server 2022 CU4 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate4#2344871)<br />
+Scope: global<br />
+SQL Server Version: >= 2022 CU4
+
+
+<a id="12656"></a>
+#### Trace Flag: 12656
+Function: For Automatic Plan Correction, introduces the ability to use a time-based plan regression check that will occur five minutes after a plan change is discovered, which avoids biasing the regression checks by queries that execute quickly.<br />
+Link: [SQL Server 2022 CU4 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate4#2344871)<br />
+Scope: global<br />
+SQL Server Version: >= 2022 CU4
+
+<a id="15915"></a>
+#### Trace Flag: 15915
+Function: Fixes a performance issue that you might encounter only when sp_lock is called frequently from multiple connections, which might cause a memory leak. The memory isn't cleaned up until you restart the SQL Server service. Added in SQL Server 2019 CU29.<br />
+Link: [SQL Server 2019 CU29 Documentation](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2019/cumulativeupdate29#3180085)<br />
+SQL Server Version: >= 2019 CU29
+
+
+
 [Docs Trace Flags]:https://docs.microsoft.com/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql
 [Query Store Trace Flags]:https://www.sqlskills.com/blogs/erin/query-store-trace-flags/
 [DBCC TRACEON]:https://docs.microsoft.com/sql/t-sql/database-console-commands/dbcc-traceon-transact-sql
@@ -5576,7 +5701,7 @@ SQL Server Version: >= 2019 CU9, >= 2017 CU21
 [Yet another X-Ray for the QP]:http://www.queryprocessor.com/tf_8628/
 [How It Works: SQL Server 2012 Database Engine Task Scheduling]:https://blogs.msdn.microsoft.com/psssql/2013/08/13/how-it-works-sql-server-2012-database-engine-task-scheduling/
 [What You Need to Know about the Batch Mode Window Aggregate Operator in SQL Server 2016: Part 1]:http://sqlmag.com/sql-server/what-you-need-know-about-batch-mode-window-aggregate-operator-sql-server-2016-part-1
-[SQL Server 2016 : Getting tempdb a little more right]:https://blogs.sentryone.com/aaronbertrand/sql-server-2016-tempdb-fixes/
+[SQL Server 2016 : Getting tempdb a little more right]:https://www.sentryone.com/blog/aaronbertrand/sql-server-2016-tempdb-fixes
 [Importance of Performing DBCC CHECKDB on all SQL Server Databases]:https://www.mssqltips.com/sqlservertip/4581/importance-of-performing-dbcc-checkdb-on-all-sql-server-databases/
 [SQL Server Parallel Query Placement Decision Logic]:https://blogs.msdn.microsoft.com/psssql/2016/03/04/sql-server-parallel-query-placement-decision-logic/
 [compatibility level]:https://docs.microsoft.com/sql/t-sql/statements/alter-database-transact-sql-compatibility-level
@@ -5631,3 +5756,4 @@ SQL Server Version: >= 2019 CU9, >= 2017 CU21
 [Minimizing the impact of DBCC CHECKDB]:https://sqlperformance.com/2012/11/io-subsystem/minimize-impact-of-checkdb
 [KB2634571]:https://web.archive.org/web/20150303213855/http://support.microsoft.com/kb/2634571
 [KB4565944]:https://support.microsoft.com/kb/4565944
+[Github disable gamsgam]:https://github.com/microsoft/bobsql/blob/master/demos/sqlserver2022/tempdb/disablegamsgam.cmd

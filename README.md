@@ -111,7 +111,7 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
     - [MSSQLTips](https://www.mssqltips.com/get-free-sql-server-tips/)
     - [BRENT OZAR](https://www.brentozar.com/) scripts, videos and articles
     - [Simple-talk Articles](https://www.simple-talk.com/)
-    - [SQLSentry Blog](http://blogs.sqlsentry.com)
+    - [SentryOne Blog](https://www.sentryone.com/blog)
     - [Glenn Berry's SQL Server Performance](http://sqlserverperformance.wordpress.com/)
     - [Kenneth Fisher SQLStudies Blog](http://sqlstudies.com/)
     - [Best SQL Server Perfomance Blog](http://sqlperformance.com/)
@@ -141,6 +141,7 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
     - [SQL-Articles](http://sql-articles.com/articles/)
     - [DallasDBAs Blog](http://dallasdbas.com/blog/)
     - [UpSearch Blog](https://upsearch.com/blog/)
+    - [SQL tutorial](https://www.scaler.com/topics/sql)
     - [ProData Blog](http://blogs.prodata.ie/)
     - [DallasDBAs.com Blog](http://dallasdbas.com/blog/)
     - [SQLBI Blog](http://www.sqlbi.com)
@@ -154,6 +155,7 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
     - [Idera SQL Server Blog](https://community.idera.com/tags/SQL%2bServer)
     - [SQL Server Science Blog](https://www.sqlserverscience.com/) (by Max Vernon)
     - [Kohera SQL Server Blog](https://kohera.be/blog/category/sql-server/)
+    - [SQL Queries Cheat Sheet](https://helpercodes.com/sql-query-cheatsheet-tutorial/)
  - Security (great thanks to [Troy Hunt](https://www.troyhunt.com/troys-ultimate-list-of-security-links/)) <a id="security"></a>
    - SQL injection
      - [sqlmap - The tool for mounting SQL injection attacks tests against a running site](http://sqlmap.org/)
@@ -167,6 +169,7 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
      - [Biggest data breaches in history](https://www.comparitech.com/blog/information-security/biggest-data-breaches-in-history/) (by Dave Albaugh)
    - [Microsoft SQL Server Permissions Posters](https://github.com/Microsoft/sql-server-samples/tree/master/samples/features/security/permissions-posters)
    - [Module Signing Info](https://modulesigning.info/) - Info and resources related to module signing (i.e. Certificates, Asymmetric Keys, `ADD SIGNATURE`, etc) in T-SQL and SQLCLR
+   - [SQL Server security best practices](https://learn.microsoft.com/en-us/sql/relational-databases/security/sql-server-security-best-practices) (by Microsoft)
  - Free Videos <a id="free-videos"></a>
    - [Youtube Brent Ozar](https://www.youtube.com/user/BrentOzar/videos)
    - [Youtube Free SQL Server Statisctics Class](https://www.youtube.com/playlist?list=PLDYqU5RH_aX05ajDAH-6sYXr4i1Mjh9lT)
@@ -237,6 +240,8 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
      - [SQL Murder Mystery](https://github.com/NUKnightLab/sql-mysteries) (by NUKnightLab)
      - [SQL Murder Mystery with answers](https://github.com/erika-e/sql-mysteries) (by Erika Pullum)
      - [SQL Problems and solutions](http://www.sql-tutorial.ru/en) (by S. I. Moiseenko)
+     - [Advanced T-SQL Puzzles](https://github.com/smpetersgithub/AdvancedSQLPuzzles) (by Scott Peters)
+     - [Leetcode SQL Problems](https://leetcode.com/problemset/database/)
    - Paid
      - [Lynda Courses](http://www.lynda.com/SQL-Server-training-tutorials/456-0.html)
      - [Veeam Free Courses](https://go.veeam.com/microsoft-sql-series-webinars.html)
@@ -252,9 +257,12 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
      - [Darling Data - The Best SQL Server Training On The Internet?](https://learn.erikdarlingdata.com/) (by Erik Darling)
      - [W3Resource SQL Exercises, Practice, Solution](https://www.w3resource.com/sql-exercises/) (by w3resource)
      - [LinkedIn SQL Server cources](https://www.linkedin.com/learning/search?entityType=COURSE&keywords=sql%20server) (by LinkedIn)
- - SQL Server Backwards Compatibility <a id="backwards-compatibility"></a>
-   - [2017 Backwards Compatibility](https://docs.microsoft.com/en-us/sql/database-engine/sql-server-database-engine-backward-compatibility)
-   - [2016 Backwards Compatibility](https://docs.microsoft.com/en-us/sql/database-engine/sql-server-database-engine-backward-compatibility)
+ - SQL Server Deprecated database engine features and Backwards Compatibility <a id="deprecated"></a>
+   - [Deprecated Features in SQL Server Replication](https://learn.microsoft.com/en-us/sql/relational-databases/replication/deprecated-features-in-sql-server-replication?view=sql-server-ver16)
+   - [Deprecated database engine features in SQL Server 2022](https://learn.microsoft.com/sql/database-engine/discontinued-database-engine-functionality-in-sql-server?view=sql-server-ver16)
+   - [Deprecated database engine features in SQL Server 2019](https://learn.microsoft.com/sql/database-engine/deprecated-database-engine-features-in-sql-server-2019?view=sql-server-ver16)
+   - [Deprecated database engine features in SQL Server 2017](https://learn.microsoft.com/sql/database-engine/deprecated-database-engine-features-in-sql-server-2017?view=sql-server-ver16)
+   - [Deprecated database engine features in SQL Server 2016](https://learn.microsoft.com/sql/database-engine/deprecated-database-engine-features-in-sql-server-2016?view=sql-server-ver16)
    - [2014 Backwards Compatibility](https://docs.microsoft.com/en-us/sql/getting-started/backward-compatibility?view=sql-server-2014)
    - [2012 Backwards Compatibility](https://docs.microsoft.com/en-us/previous-versions/sql/sql-server-2012/ms143532(v=sql.110))
    - [2008 R2 Backwards Compatibility](https://docs.microsoft.com/en-us/previous-versions/sql/sql-server-2008-r2/cc707787(v=sql.105))
@@ -420,6 +428,9 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
     - [sp_CRUDGen - stored procedure that generates stored procedures for you based on your tables and metadata like foreign keys and data types](https://github.com/kevinmartintech/sp_CRUDGen) (by Kevin Martin)
     - [sp_Develop - can be used by database developers, software developers and for performing database code (smell) reviews.s](https://github.com/EmergentSoftware/SQL-Server-Development-Assessment) (by Kevin Martin)
     - [DBA Dash - Performance monitoring tool for SQL Server](https://github.com/trimble-oss/dba-dash) (by Trimble)
+    - [lowlydba.sqlserver - A cross-platform Ansible collection using PowerShell to configure and maintain SQL Server](https://github.com/lowlydba/lowlydba.sqlserver) - (by John McCall)
+    - [SQLWatch - SQLWATCH is an Open Source and completely free SQL Server Monitoring project](https://sqlwatch.io/) (by Marcin Gminski)
+    - [Azure_Synapse_Toolbox - Repository of tools/queries for managing and monitoring Azure Synapse](https://github.com/microsoft/Azure_Synapse_Toolbox) (by Microsoft)
  - Other
     - [SQL# SQLCLR functions](https://sqlsharp.com/) (by Sql Quantum Lift)
     - [SQL Server Latch Classes Library](https://www.sqlskills.com/help/latches/) (by Paul S. Randal)
@@ -478,7 +489,10 @@ Useful links, scripts, tools and best practice for Microsoft SQL Server Database
     - [SQL Assessment API rules in .csv format](https://github.com/microsoft/sql-server-samples/blob/master/samples/manage/sql-assessment-api/DefaultRuleset.csv) (by Microsoft)
     - [SQL cheat sheet for PostgreSQL and Oracle](https://www.pcwdld.com/sql-cheat-sheet) (by Marc Wilson)
     - [Bllitz Excel UI](https://1pro.bi/blitz-excel-ui/) (by Alex)
-    - [Industry-specific Data Models - cover Subject Areas and are used to create Enterprise Data Models](http://www.databaseanswers.org/data_models/)
+    - [Industry-specific Data Models - cover Subject Areas and are used to create Enterprise Data Models](https://web.archive.org/web/20220330034214/http://databaseanswers.org/data_models/)
+    - [Library of Database Schemas](https://dbschemalibrary.com/)
+    - [SQLFacts - A powerful suite of FREE TSQL tools for SQL Server database professionals](https://www.sqlfacts.com)
+    - [sql-log-shipping-service - provides a solution for automatically restoring SQL Server transaction log backups](https://github.com/trimble-oss/sql-log-shipping-service) (by Trimble Online Source Store)
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -494,6 +508,7 @@ BIML Resources
 - [Stairway to Biml](http://www.sqlservercentral.com/stairway/100550/)
 - [Biml User Group at LinkedIn](https://www.linkedin.com/groups/4640985)
 - [Building Blocks of Biml (Pluralsight course by Stacia Misner Varga)](https://app.pluralsight.com/library/courses/building-blocks-biml/table-of-contents)
+- [SQL Reserved Words](https://modern-sql.com/reserved-words-empirical-list) (by Markus Winand)
 
 BIML Bloggers
 - [Ben Weissman](https://www.solisyon.de/biml-blog-de/)
@@ -551,13 +566,13 @@ BIML Bloggers
 
 
 ## TSQL Format Code
- - [SQLinform Online](https://sqlinform.azurewebsites.net)
+ - [SQLinform Online Web](https://sqlinform.azurewebsites.net)
+ - [SQLinform Online Utility](https://www.sqlinform.com)
  - [Instant SQL Formatter](http://www.dpriver.com/pp/sqlformat.htm)
  - http://poorsql.com/
  - http://www.architectshack.com/PoorMansTSqlFormatter.ashx
  - http://www.ssmstoolspack.com/
  - http://www.devart.com/dbforge/sql/sqlcomplete/
- - http://www.sql-format.com/
  - http://www.apexsql.com/sql_tools_refactor.aspx
  - http://stackoverflow.com/questions/401928/sql-formatter-for-sql-management-studio
 
@@ -610,7 +625,7 @@ SQL Server:
  - [Syncfusion Techportal](http://syncfusion.com/resources/techportal)
  - [Modern Storage Strategies for SQL Server](http://www.actualtech.io/gg-modern-storage/)
  - [Migrating SQL Server Databases to Azure](https://blogs.msdn.microsoft.com/microsoft_press/2016/05/11/free-ebook-microsoft-azure-essentials-migrating-sql-server-databases-to-azure/)
- - [SQL Sentry Free eBooks](https://www.sqlsentry.com/sql-server-books)
+ - [SentryOne Free eBooks](https://www.sentryone.com/resources#filter=.ebook)
  - [Microsoft Cloud Security for Enterprise Architects (PDF)](http://download.microsoft.com/download/6/d/f/6dfd7614-bbcf-4572-a871-e446b8cf5d79/msft_cloud_architecture_security.pdf)
  - [Brent Ozar SQL Server Setup Checklist eBook](http://u.brentozar.com/eBook_SQL_Server_Setup_Checklist.pdf)
  - [Introducing Microsoft SQL Server 2016](https://info.microsoft.com/Introducing-SQL-Server-2016-eBook.html)

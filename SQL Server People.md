@@ -60,7 +60,7 @@ Most valuable professionals in Microsoft SQL Server Database world
 | Dmitry Pilugin      | [Dmitry Blog]                | RUS     | Moscow           | [@SomewereSomehow] | pilugin@inbox.ru                  | 4   | [Pilugin MVP]      |
 | Buck Woody          | [Buck Blog]                  |         | NULL             | [@buckwoodymsft]   | NULL                              | 0   | -                  |
 | Steve Stedman       | [Steve Stedman Blog]         | USA     | Austin           | [@stedman]         | NULL                              | 0   | -                  |
-| Daniel Hutmacher    | [Daniel Hutmacher Blog]      | USA     | Austin           | [@dhmacher]        | NULL                              | 0   | -                  |
+| Daniel Hutmacher    | [Daniel Hutmacher Blog]      | SWE     | Stockholm        | [@dhmacher]        | NULL                              | 0   | -                  |
 | Niko Neugebauer     | [Niko Blog]                  | PRT     | NULL             | [@NikoNeugebauer]  | niko@nikoport.com                 | 6   | [Neugebauer MVP]   |
 | Mike Fal            | [Mike Fal Blog]              | USA     | Denver           | [@Mike_Fal]        | NULL                              | 0   | -                  |
 | Robert L Davis      | [Robert Blog]                | USA     | New York         | [@SQLSoldier]      | NULL                              | 3   | [Davis MVP]        |
@@ -105,7 +105,7 @@ Most valuable professionals in Microsoft SQL Server Database world
 [Andrea Allred Blog]:https://royalsql.com/
 [Randolph West Blog]:https://rabryst.ca/
 [Dave Ballantyne]:clearskysql.co.uk/
-[Lori Edwards Blog]:https://blogs.sentryone.com/author/LoriEdwards/
+[Lori Edwards Blog]:https://www.sentryone.com/blog/author/lori-edwards
 [Brent Ozar Blog]:http://www.brentozar.com/
 [SQLBlog]:http://sqlblog.com/
 [Ola Maintenance Solution]:https://ola.hallengren.com/
@@ -179,7 +179,7 @@ Most valuable professionals in Microsoft SQL Server Database world
 [2]:http://nedotter.com/contact/
 [Joe Obbish Blog]:https://orderbyselectnull.com/
 [Stephen Bennett Blog]:https://sqlnotesfromtheunderground.wordpress.com/
-[Brian Davis Articles]:https://blogs.sentryone.com/author/briandavis/
+[Brian Davis Articles]:https://www.sentryone.com/blog/author/brian-davis
 [Raul Gonzalez Blog]:http://www.sqldoubleg.com/
 [Hugo Kornelis Blog]:https://sqlserverfast.com/
 [Drew Furgiuele Blog]:https://port1433.com/
